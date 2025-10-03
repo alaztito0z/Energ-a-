@@ -1,1 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Generador Híbrido Solar-Eólico</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <nav>
+    <h1>🌞⚡🌬 Generador Híbrido</h1>
+    <ul>
+      <li><button onclick="showSection('inicio')">Inicio</button></li>
+      <li><button onclick="showSection('problema')">Problema y Solución</button></li>
+      <li><button onclick="showSection('simulador')">Simulador</button></li>
+      <li><button onclick="showSection('educacion')">Educación</button></li>
+      <li><button onclick="showSection('dashboard')">Dashboard</button></li>
+    </ul>
+  </nav>
 
+  <!-- Sección Inicio -->
+  <section id="inicio" class="active">
+    <h2>Bienvenido a la Energía del Futuro</h2>
+    <p>Un sistema híbrido que combina energía solar y eólica en una torre inteligente con sensor 360°.</p>
+    <div class="animacion">
+      <div class="sol"></div>
+      <div class="turbina"></div>
+    </div>
+    <button onclick="showSection('simulador')">Probar simulador</button>
+  </section>
+
+  <!-- Sección Problema y Solución -->
+  <section id="problema">
+    <h2>El Problema y Nuestra Solución</h2>
+    <div class="cards">
+      <div class="card problema">❌ Problema: Alta dependencia de combustibles fósiles</div>
+      <div class="card solucion">✅ Solución: Generador híbrido solar-eólico con sensor inteligente</div>
+    </div>
+  </section>
+
+  <!-- Sección Simulador -->
+  <section id="simulador">
+    <h2>⚙️ Simulador de Energía</h2>
+    <label>☀️ Intensidad Solar: <input type="range" id="solarInput" min="0" max="100" value="50"></label>
+    <label>🌬 Velocidad del Viento: <input type="range" id="windInput" min="0" max="100" value="50"></label>
+    <p>Energía total generada: <span id="energyValue">0</span> kWh</p>
+    <canvas id="energyChart" width="400" height="200"></canvas>
+  </section>
+
+  <!-- Sección Educación -->
+  <section id="educacion">
+    <h2>📚 Aprende más</h2>
+    <div class="tabs">
+      <button onclick="showTab('solar')">Energía Solar</button>
+      <button onclick="showTab('eolica')">Energía Eólica</button>
+      <button onclick="showTab('sensor')">Sensor 360°</button>
+    </div>
+    <div id="tabContent">
+      <p>Selecciona un tema para aprender más.</p>
+    </div>
+  </section>
+
+  <!-- Sección Dashboard -->
+  <section id="dashboard">
+    <h2>📊 Dashboard Futurista</h2>
+    <div class="stats">
+      <div class="stat">⚡ Producción: <span id="dashEnergy">0</span> kWh</div>
+      <div class="stat">🌍 CO₂ evitado: <span id="dashCO2">0</span> kg</div>
+      <div class="stat">🔋 Autonomía: <span id="dashBattery">0</span> horas</div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
