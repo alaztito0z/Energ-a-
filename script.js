@@ -5,10 +5,11 @@ const navMenu = document.getElementById("navMenu");
 if (hamburgerBtn && navMenu) {
   hamburgerBtn.addEventListener("click", () => {
     navMenu.classList.toggle("show");
+    hamburgerBtn.classList.toggle("active");
   });
 }
 
-// Simulador (solo funciona si los elementos existen en la página)
+// Simulador (solo si existe)
 const solarInput = document.getElementById("solarInput");
 const windInput = document.getElementById("windInput");
 const energyValue = document.getElementById("energyValue");
@@ -37,7 +38,6 @@ if (solarInput && windInput && energyValue) {
     energyChart.data.datasets[0].data = [solar*0.05, wind*0.07, total];
     energyChart.update();
 
-    // Dashboard también (si existe)
     if (document.getElementById("dashEnergy")) {
       document.getElementById("dashEnergy").textContent = total.toFixed(2);
       document.getElementById("dashCO2").textContent = (total*0.8).toFixed(1);
