@@ -1,1 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generador Híbrido - Simulador</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Generador Híbrido</div>
+    <nav class="nav-links" id="navMenu">
+      <a href="index.html">Inicio</a>
+      <a href="problema.html">Problema</a>
+      <a href="simulador.html">Simulador</a>
+      <a href="educacion.html">Educación</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn">☰</button>
+  </header>
 
+  <main class="content">
+    <h2>Simulador de Energía</h2>
+    <label>☀️ Solar: <input type="range" id="solarInput" min="0" max="100" value="50"></label>
+    <label>🌬 Eólica: <input type="range" id="windInput" min="0" max="100" value="50"></label>
+    <p>Energía total: <span id="energyValue">0</span> kWh</p>
+    <canvas id="energyChart" width="400" height="200"></canvas>
+  </main>
+</body>
+</html>
