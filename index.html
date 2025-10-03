@@ -1,77 +1,256 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Generador Híbrido Solar-Eólico</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Generador Híbrido │ Control Lab</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Chart.js (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <!-- Barra de navegación -->
-  <nav>
-    <h1>🌞⚡🌬 Generador Híbrido</h1>
-    <ul>
-      <li><button onclick="showSection('inicio')">Inicio</button></li>
-      <li><button onclick="showSection('problema')">Problema y Solución</button></li>
-      <li><button onclick="showSection('simulador')">Simulador</button></li>
-      <li><button onclick="showSection('educacion')">Educación</button></li>
-      <li><button onclick="showSection('dashboard')">Dashboard</button></li>
-    </ul>
-  </nav>
+  <div id="app">
 
-  <!-- Sección Inicio -->
-  <section id="inicio" class="active">
-    <h2>Bienvenido a la Energía del Futuro</h2>
-    <p>Un sistema híbrido que combina energía solar y eólica en una torre inteligente con sensor 360°.</p>
-    <div class="animacion">
-      <div class="sol"></div>
-      <div class="turbina"></div>
-    </div>
-    <button onclick="showSection('simulador')">Probar simulador</button>
-  </section>
+    <!-- NAV / SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">⚡</div>
+        <div>
+          <h1>HybridLab</h1>
+          <p class="muted">Solar • Wind • Sensing</p>
+        </div>
+      </div>
 
-  <!-- Sección Problema y Solución -->
-  <section id="problema">
-    <h2>El Problema y Nuestra Solución</h2>
-    <div class="cards">
-      <div class="card problema">❌ Problema: Alta dependencia de combustibles fósiles</div>
-      <div class="card solucion">✅ Solución: Generador híbrido solar-eólico con sensor inteligente</div>
-    </div>
-  </section>
+      <nav class="menu">
+        <button data-target="hero" class="menu-btn active">Inicio</button>
+        <button data-target="system" class="menu-btn">Sistema</button>
+        <button data-target="simulator" class="menu-btn">Simulador</button>
+        <button data-target="dashboard" class="menu-btn">Dashboard</button>
+        <button data-target="docs" class="menu-btn">Documentación</button>
+      </nav>
 
-  <!-- Sección Simulador -->
-  <section id="simulador">
-    <h2>⚙️ Simulador de Energía</h2>
-    <label>☀️ Intensidad Solar: <input type="range" id="solarInput" min="0" max="100" value="50"></label>
-    <label>🌬 Velocidad del Viento: <input type="range" id="windInput" min="0" max="100" value="50"></label>
-    <p>Energía total generada: <span id="energyValue">0</span> kWh</p>
-    <canvas id="energyChart" width="400" height="200"></canvas>
-  </section>
+      <div class="sidebar-footer">
+        <small class="muted">v1.0 — GitHub Pages</small>
+      </div>
+    </aside>
 
-  <!-- Sección Educación -->
-  <section id="educacion">
-    <h2>📚 Aprende más</h2>
-    <div class="tabs">
-      <button onclick="showTab('solar')">Energía Solar</button>
-      <button onclick="showTab('eolica')">Energía Eólica</button>
-      <button onclick="showTab('sensor')">Sensor 360°</button>
-    </div>
-    <div id="tabContent">
-      <p>Selecciona un tema para aprender más.</p>
-    </div>
-  </section>
+    <!-- MAIN -->
+    <main class="main">
+      <!-- HERO -->
+      <section id="hero" class="panel active">
+        <header class="panel-header">
+          <h2>Generador Híbrido de Energía</h2>
+          <p class="lead">Integración solar + eólica con monitorización 360° — diseño experimental y métricas científicas.</p>
+        </header>
 
-  <!-- Sección Dashboard -->
-  <section id="dashboard">
-    <h2>📊 Dashboard Futurista</h2>
-    <div class="stats">
-      <div class="stat">⚡ Producción: <span id="dashEnergy">0</span> kWh</div>
-      <div class="stat">🌍 CO₂ evitado: <span id="dashCO2">0</span> kg</div>
-      <div class="stat">🔋 Autonomía: <span id="dashBattery">0</span> horas</div>
-    </div>
-  </section>
+        <div class="hero-grid">
+          <div class="visualization">
+            <!-- Background animated: SVG turbine + panels -->
+            <div class="device-card">
+              <!-- Minimal SVG turbine + panels (scalable) -->
+              <svg viewBox="0 0 600 420" class="device-svg" aria-hidden="true">
+                <!-- tower -->
+                <rect x="290" y="160" width="20" height="200" rx="8" ry="8" fill="#1f2937" opacity="0.9"></rect>
 
+                <!-- panels -->
+                <g transform="translate(40,260)">
+                  <rect x="0" y="0" width="220" height="90" rx="6" fill="#0b1020"></rect>
+                  <g fill="none" stroke="#134e4a" stroke-width="2">
+                    <line x1="10" y1="12" x2="210" y2="12"></line>
+                    <line x1="10" y1="36" x2="210" y2="36"></line>
+                    <line x1="10" y1="60" x2="210" y2="60"></line>
+                  </g>
+                </g>
+
+                <!-- Turbine rotor (animated via CSS) -->
+                <g class="rotor" transform="translate(300,150)">
+                  <circle r="10" fill="#94a3b8"></circle>
+                  <g class="blade" transform="rotate(0)">
+                    <path d="M0,0 L-4,-70 Q0,-78 8,-70 Z" fill="#cbd5e1"/>
+                  </g>
+                  <g class="blade" transform="rotate(120)">
+                    <path d="M0,0 L-4,-70 Q0,-78 8,-70 Z" fill="#cbd5e1"/>
+                  </g>
+                  <g class="blade" transform="rotate(240)">
+                    <path d="M0,0 L-4,-70 Q0,-78 8,-70 Z" fill="#cbd5e1"/>
+                  </g>
+                </g>
+
+                <!-- sun (animated) -->
+                <g class="sun" transform="translate(520,60)">
+                  <circle r="28" fill="#facc15"></circle>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="summary">
+            <div class="card metrics">
+              <div>
+                <h3 id="heroProduction">— kWh</h3>
+                <p class="muted">Producción estimada (simulación)</p>
+              </div>
+              <div>
+                <button class="cta" data-target="simulator">Probar Simulador</button>
+              </div>
+            </div>
+
+            <div class="card about">
+              <h4>Concepto</h4>
+              <p>Un sistema compacto que integra paneles fotovoltaicos con una turbina eólica vertical montada en la punta de una torre y un sensor 360° para monitorización y seguridad.</p>
+              <ul class="feature-list">
+                <li>Configuración modular</li>
+                <li>Operación autónoma (opcional)</li>
+                <li>Datos científicos reproducibles</li>
+              </ul>
+            </div>
+
+            <div class="card quick-actions">
+              <button data-target="dashboard" class="ghost">Abrir Dashboard</button>
+              <a class="ghost" href="#docs" onclick="showSection('docs')">Ver documentación</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SYSTEM -->
+      <section id="system" class="panel">
+        <header class="panel-header">
+          <h2>Arquitectura del sistema</h2>
+          <p class="muted">Diagrama y descripción de los subsistemas.</p>
+        </header>
+
+        <div class="grid-2">
+          <div class="card diagram">
+            <h4>Diagrama conceptual</h4>
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='240'><rect width='100%' height='100%' fill='%2310202a' rx='8'/><text x='20' y='40' fill='%23bdeedd' font-size='18' font-family='Inter'>Paneles → Regulador → Banco de baterías → Inversor → Carga</text></svg>" alt="diagrama conceptual" />
+            <p class="muted small">Modelo: recolección → almacenamiento → conversión → consumo.</p>
+          </div>
+
+          <div class="card specs">
+            <h4>Especificaciones (ejemplo)</h4>
+            <ul>
+              <li>Paneles: 3 × 50 Wp (monocristalino)</li>
+              <li>Turbina VAWT: eje vertical, 200 W (pico)</li>
+              <li>Sensor: pir + rotación 360° (posible LIDAR/sonar)</li>
+              <li>Control: microcontrolador + telemetría (opcional)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIMULATOR -->
+      <section id="simulator" class="panel">
+        <header class="panel-header">
+          <h2>Simulador avanzado</h2>
+          <p class="muted">Ajusta condiciones y observa métricas científicas.</p>
+        </header>
+
+        <div class="sim-grid">
+          <div class="card controls">
+            <label class="slider-label">Irradiancia solar (W/m²)
+              <input id="solarInput" type="range" min="0" max="1200" step="1" value="600">
+              <output id="solarVal">600</output>
+            </label>
+
+            <label class="slider-label">Velocidad del viento (m/s)
+              <input id="windInput" type="range" min="0" max="30" step="0.1" value="6.5">
+              <output id="windVal">6.5</output>
+            </label>
+
+            <label class="slider-label">Ángulo de panel (°)
+              <input id="tiltInput" type="range" min="0" max="90" step="1" value="25">
+              <output id="tiltVal">25</output>
+            </label>
+
+            <div class="calc-params">
+              <small class="muted">Modelo simplificado:</small>
+              <pre>Ps = G·A·η · cos(tilt)
+Pw = 0.5·ρ·Cp·A_rotor·V³</pre>
+            </div>
+
+            <div class="actions">
+              <button id="simulateBtn" class="cta">Run Simulation</button>
+              <button id="resetBtn" class="ghost">Reset</button>
+            </div>
+          </div>
+
+          <div class="card chart">
+            <canvas id="mixChart" aria-label="Gráfica de producción" role="img"></canvas>
+            <div class="chart-legend">
+              <div><span class="dot solar"></span> Solar</div>
+              <div><span class="dot wind"></span> Eólica</div>
+              <div><span class="dot total"></span> Total</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="panel">
+        <header class="panel-header">
+          <h2>Dashboard científico</h2>
+          <p class="muted">Métricas y exportación de datos (CSV).</p>
+        </header>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3 id="statSolar">0 W</h3>
+            <p class="muted">Potencia solar</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statWind">0 W</h3>
+            <p class="muted">Potencia eólica</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statTotal">0 W</h3>
+            <p class="muted">Total instantáneo</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statCO2">0 kg</h3>
+            <p class="muted">CO₂ evitado (estim.)</p>
+          </div>
+        </div>
+
+        <div class="panel-actions">
+          <button id="exportCSV" class="ghost">Exportar datos (CSV)</button>
+          <button id="shareSnapshot" class="ghost">Tomar snapshot</button>
+        </div>
+      </section>
+
+      <!-- DOCS -->
+      <section id="docs" class="panel">
+        <header class="panel-header">
+          <h2>Documentación & notas experimentales</h2>
+          <p class="muted">Breve guía para reproducir el experimento.</p>
+        </header>
+
+        <div class="card docs-card">
+          <h4>Protocolo de test</h4>
+          <ol>
+            <li>Instalar paneles en inclinación X y medir irradiancia.</li>
+            <li>Medir velocidad de viento y registrar cada 10s.</li>
+            <li>Registrar potencia instantánea de paneles y turbina.</li>
+            <li>Calcular energía integrada en periodos (kWh).</li>
+          </ol>
+
+          <h4>Fórmulas</h4>
+          <pre>
+Ps = G · A · η · cos(tilt)
+Pw = 0.5 · ρ · Cp · A_rotor · V³
+          </pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Script -->
   <script src="script.js"></script>
 </body>
-</html>
+            </html>
